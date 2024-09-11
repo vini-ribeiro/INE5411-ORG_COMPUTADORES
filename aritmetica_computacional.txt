@@ -1,0 +1,34 @@
+ULA: é um circuito eletronico que realiza as operações aritmeticas e logicas. Sua implementação se dá po circuitos combinacionais.
+
+circuitos combinacionais: não possui memória, ou seja, a computação deste tipo de circuito não necessita de clock.
+
+circuitos sequenciais: não possui memória, ou seja, a computação deste tipo de circuito não necessita de clock.
+
+pares casados: tu sempre manda o oposto por uma segunda linha. Evita contaminação dos dados por ruído.
+
+OBS: os cabos sempre são seriais.
+
+A multiplicação e divisão podem ser externos. ex:DSP
+
+Quantificadores minimos da ULA: Z para zeros, N para negativos, V para overflow, C para carry
+
+usamos variaveis unsigned para representação de textos.
+
+existem procesadores mais baratos para não pagar tanto. Nible tem 4 bits.
+
+existem duas classes de processadores:
+	ponto fixo:
+		virgula sempre no mesmo lugar;
+		somas feitas diretamente (casa a casa);
+		não suportam diretamente operações em ponto flutuante, precisam de software (compilador) para normalizar os numeros em ponto fixo;
+	ponto flutuante:
+		nos ajudam a representam numeros muito grandes ou muito pequenos;
+		6,125E-5: caracteristica,mantissa x expoente;
+		em binario a caracteristica sempre vai ser 1, ou seja, podemos omitir;
+		a forma em binario fica: sinal do numero - sinal do expoente - expoente - mantissa
+
+
+excesso de M: pesquisar???
+
+
+identificadore da ula, regras e a ula é combinacional, direnciar ponto fixo do flutuante e como as operações são feitas, como o overflow vai ser indicado, onde setar o overflow, existem instruções de soma que gera o ovr e que não geram, que as outras operações são feitas por software em ponto fixo e por hardware por ponto flutuante (mais caro), fazer as transformações em ponto flutuante
