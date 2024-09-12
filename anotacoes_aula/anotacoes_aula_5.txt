@@ -1,0 +1,29 @@
+Desempenho: vai depender do conjunto de instruções (assembly);
+
+Para analisar o desempenho precisamos definir uma métrica (slide da comparação dos aviões);
+
+Alguns critérios:
+	tempo de resposta (critico);
+	vazão (quanto trabalho em razão do tempo);
+
+A justificativa de compra muda de acordo com as requisições (tarefa vagabunda, computador vagabundo);
+
+tempo gasto: leva em conta tudo. Entender melhor.
+
+tempo de CPU ????
+
+tempo de CPU do usuário (nosso FOCO, de uma aplicação específica):
+
+desempenho = 1 / (Tempo de execução)
+
+desempenhoX / desempenhoY = (Tempo de execução Y) / (Tempo de execução X) = n
+
+OBS: multiplicação gasta que a soma;
+
+OBS: fórmulas no slide 15
+
+Taxa exec da cpu = I *  CPI * T
+				 = quant instru * ciclos por instru * periodo do clock
+
+
+estudar fortemente a partir do slide 20 até 30;
