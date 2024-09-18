@@ -1,0 +1,6 @@
+Linguagem de alto nível (não são executadas diretamente pelo processador):
+    Compiladas: o compilador gera um executável.
+    Interpretadas: O código é compilado para um Bytecode que posteriormente lido por um interpretador na máquina virtual.
+    Híbridas: um programa interpreta e passa cada instrução para o SO.
+
+Nas linguagens compiladas o Compilador pega o código fonte e transforma em um arquivo Objeto, que será linkado pelo ligador às bibliotecas do sistema.

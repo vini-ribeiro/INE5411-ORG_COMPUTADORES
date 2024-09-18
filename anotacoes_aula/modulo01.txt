@@ -1,0 +1,26 @@
+Anotações dos slides do módulo 1 para a primeira prova de organização de computadores
+
+O que é um computador: um equipamento capaz de armazenar e manipular quatidades numéricas representadas fisicamente;
+
+função generica do computador:
+	1) Algum sistema de transfênria de dados (com o mundo externo ao computador);
+	2) Mecanismo de controle (o que manda no computador, vulgo processador principal);
+	3) Recursos de processamento de dados (processadores auxiliares e aceleradores);
+	4) Recurso de armazenamento (principal, secundaria, etc);
+
+			 4
+		    /
+	1 ---- 2
+		 	\
+		 	 3
+
+Podemos fazer um esquema de computador simples:
+OBS o pontilhado no esquema abaixo é o barramento
+
+processador 		memória principal
+	|					  |
+	-----------------------
+			  |
+		entrada/saida
+
+Sistemas embarcados: Mono função, fortes restrições e são reativos em tempo real. São computadores transparentes ao usuário;

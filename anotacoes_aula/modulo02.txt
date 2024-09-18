@@ -1,0 +1,30 @@
+Exemplos de softwares de um computador:
+	SOs: windows, linux, unix, DOS, etc.
+	Utilitários: compiladores, montadores, ligadores, depuradores, etc.
+	Aplicativos: jogos, editores de texto, vizualizador de imagem, editores de vídeos, navegadores, etc.
+
+Temos 3 tipos de processadores:
+	Propósito geral: é o faz tudo, sendo programado pode fazer qualquer coisa (só que vai ser mais lento);
+	Aplicação específica: Foi criado para um tipo de programação específica (ex: GPUs);
+	Propósito único: somente fazem aquilo que foi criado para fazer (ex: hardware criado para fazer o cálculo do n-ésimo termo de fibonacci);
+
+GPP: 
+	General Propose Processor (mais conhecido como microprocessador).
+	Nele temos o controle e o datapath, memória de dados e de programa:
+		Datapath: banco de registradores e uma ULA geral
+		Controle: IR, PC, 
+	Tem baixo custo NRE;
+
+ASIP:
+	Processador de aplicação específica (é programável assim como o GPP, mas otimizada para uma classe de aplicações).
+	Ao contrário do GPP, nele o datapath é customizado. Podemos remover/alterar algumas estruturas para aumentar/otimizar o desempenho de um conjunto tipos de processamento de dados.
+
+SPP:
+	Processador de propósito único. É criado para um programa expecífico, tanto é que não possui memória de programa (possui memória de dados).
+
+Processadores generalistas mais flexíveis que os de SPP, mas os SPP são mais rápidos, menores e mais econômicos para sua finalidade.
+
+ASIPs tem dois tipos básicos: 
+	Microcontroladores (MCUs): são sistemas completos integrados em um único chip (cpus, memórias, interfaces de E/S)
+	Processadores de sistemas digitais (DSPs): especializados para o processamento digital de áudio, vídeo, etc.
+	
