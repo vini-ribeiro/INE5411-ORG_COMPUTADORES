@@ -1,58 +1,84 @@
 .data
-	
+	x: 		.double -5.5 -4 -1 0, 3.141592, 4, 5, 10, 15, 17, 18, 19
+	sinal_monomio: 	.double 1
+	numero_1:	.double 1
+	resultado:	.double 0
 .text
 main:
-	li	$a0, 10
-	li	$a1, 0
-	jal	potencia_n
+	la	$s0, x
+	li 	$s1, 0
+loop_testes:
+	bge	$s1, 12, loop_testes_exit
+	addi	$s1, $s1, 1
+	l.d	$f0, 0($s0)
+	addi	$s0, $s0, 8
+	jal	seno_x
+	j loop_testes
+loop_testes_exit:
+	
 	j	exit_programa
 
-
+# recebe o argumento em f0 e retorna em f2
 seno_x:
-	move	$s0, $a0	# salva x em s0
-	li	$t7, 1		# configura uma variável para alterar o sinal da operação dos monômios
-	li	$t0, 1		# inicializa t0 (expoente e fatorial)
+	addi	$sp, $sp, -4		# incrementa a pilha
+	sw	$ra, 4($sp)		# salva o endereço de retorno
+
+	mov.d	$f4, $f0		# salva x em f4
+	l.d	$f6, sinal_monomio	# configura uma variável para alterar o sinal da operação dos monômios
+	l.d	$f8, resultado			# acumulador do resultado
+	li	$t0, 1			# inicializa t0 (expoente e fatorial)
 loop_seno:
-	bgt	$t0, 41, exit_loop_seno
-	move	$a0, $s0	# x é passado como base no argumento de potencia_n
-	move	$a1, $t0	# éxpoente da potencia_n
+	bgt	$t0, 41, exit_loop_seno		# condição para o loop
+	
+	#move	$a0, $s0	# x é passado como base no argumento de potencia_n
+	move	$a0, $t0	# a0 é o expoente
+	mov.d	$f0, $f4	# coloco o valor de x na base
 	jal	potencia_n	# chamada da função potencia_n
-	move	$t1, $v0	# pega o retorno de potencia_n
+	# retorno de potencia_n está em f2
+
 	move	$a0, $t0	# passa o argumento para fatorial
-	jal	fatorial
-	move	$t2, $v0	# salva em t2 o resultado de fatorial
-	div	$t3, $t1, $t2	# faz x^n/n!
-	mul	$t3, $t3, $t7	# configura o sinal do monômio
-	sub	$t7, $zero, $t7	# inverte o sinal para a próxima iteração
-	add	$t4, $t4, $t3	# soma o monômio no acumulador
+	jal	fatorial	# o resultado do fatorial está f10
+	
+	div.d	$f2, $f2, $f10	# pega o retorno e divide t1, guardando no próprio t1
+	
+	mul.d	$f2, $f2, $f6	# configura o sinal do monômio
+	neg.d	$f6, $f6	# inverte o sinal para o próximo monômio
+
+	add.d	$f8, $f8, $f2	# soma o monômio no acumulador
+	
 	addi	$t0, $t0, 2	# incrementa o expoente e fatorial para a próxima iteração
 	j	loop_seno	
 exit_loop_seno:
-	move	$v0, $t4
+	mov.d	$f2, $f8
+	addi	$sp, $sp, 4
+	lw	$ra, 0($sp)
 	jr	$ra
 	
 	
 
 
-# procedimento para calcular a n-ésima potência (a0, a1) = (base, expoente)
+# procedimento para calcular a n-ésima potência (f0, a0) = (base, expoente) e retorna em f2 também
+# utiliza f0 e f2
 potencia_n:	
-	li	$v0, 1		# configura o retorno
+	l.d	$f2, numero_1		# configura o retorno
 loop_pot:
-	beqz	$a1, exit_loop_pot
-	addi	$a1, $a1, -1	# decrementa o expoente
-	mul	$v0, $v0, $a0	# acrescente no acumulador a parcela da potência
+	beqz	$a0, exit_loop_pot
+	addi	$a0, $a0, -1	# decrementa o expoente
+	mul.d	$f2, $f2, $f0	# acrescente no acumulador a parcela da potência
 	j	loop_pot
 exit_loop_pot:
 	jr	$ra	# fim do procedimento potencia_n
 
 
 
-# fatorial de um número dado
+# fatorial de um número dado (recebe em a0 e retorna em v0)
 fatorial:
-	li	$v0, 1		# contador do loop
+	l.d	$f10, numero_1		# configura o retorno
 loop_fat:
-	ble	$a0, 1, exit_loop_fat	# t0 vai decrementando até chegar em 1
-	mul	$v0, $v0, $a0		# acumulador para as multiplicações
+	ble	$a0, 1, exit_loop_fat	# a0 vai decrementar até chegar a 1
+	mtc1.d	$a0, $f12		# passa o inteiro para f12
+	cvt.d.w	$f12, $f12		# converte para double
+	mul.d	$f10, $f10, $f12	# acumulador para as multiplicações
 	addi	$a0, $a0, -1		# decrementa a0 para achar o próximo multiplicador
 	j	loop_fat
 exit_loop_fat:
