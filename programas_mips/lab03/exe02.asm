@@ -1,8 +1,22 @@
+# sen(-5.5) ≈ 0.7055
+# sen(-4) ≈ 0.7568
+# sen(-1) ≈ -0.8415
+# sen(0) = 0
+# sen(3.141592) ≈ 0 (pois π ≈ 3.141592, e sen(π) = 0)
+# sen(4) ≈ -0.7568
+# sen(5) ≈ -0.9589
+# sen(10) ≈ -0.5440
+# sen(15) ≈ 0.6503
+# sen(17) ≈ -0.9614
+# sen(18) ≈ -0.7509
+# sen(19) ≈ 0.1499
+
 .data
 	x: 		.double -5.5 -4 -1 0, 3.141592, 4, 5, 10, 15, 17, 18, 19
 	sinal_monomio: 	.double 1
 	numero_1:	.double 1
 	resultado:	.double 0
+	s:		.asciiz "\n"
 .text
 main:
 	la	$s0, x
@@ -13,6 +27,12 @@ loop_testes:
 	l.d	$f0, 0($s0)
 	addi	$s0, $s0, 8
 	jal	seno_x
+	li	$v0, 3
+	mov.d	$f12, $f2
+	syscall
+	li	$v0, 4
+	la	$a0, s
+	syscall
 	j loop_testes
 loop_testes_exit:
 	
