@@ -18,29 +18,51 @@
 	lw	$t0, _0_
 	sw	$t0, 0xffff0010
 	
+	li	$a0, 1000
+	li	$v0, 32
+	syscall
+	
 	lw	$t0, _1_
 	sw	$t0, 0xffff0010
-	
+
+	syscall
+		
 	lw	$t0, _2_
 	sw	$t0, 0xffff0010
+	
+	syscall
 	
 	lw	$t0, _3_
 	sw	$t0, 0xffff0010
 	
+	syscall
+	
 	lw	$t0, _4_
 	sw	$t0, 0xffff0010
+	
+	syscall
 	
 	lw	$t0, _5_
 	sw	$t0, 0xffff0010
 	
+	syscall
+	
 	lw	$t0, _6_
 	sw	$t0, 0xffff0010
+	
+	syscall
 	
 	lw	$t0, _7_
 	sw	$t0, 0xffff0010
 	
+	syscall
+	
 	lw	$t0, _8_
 	sw	$t0, 0xffff0010
 	
+	syscall
+	
 	lw	$t0, _9_
 	sw	$t0, 0xffff0010
+	
+	syscall
