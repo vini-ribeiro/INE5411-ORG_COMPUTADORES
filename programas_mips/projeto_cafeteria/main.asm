@@ -27,14 +27,18 @@ DISPLAY7SEG:
 	sw	$t4, 16($sp)
 CAPTURA_TECLA:
 	li	$t0, 1
-LOOP_LER_TECLA:
+LER_TECLA:
 	sb 	$t0, 0xffff0012			# insere o código da linha
 	lw 	$t1, 0xffff0014			# pega o valor na memória, pela tecla apertada
-	bnez	$t1, CLICOU_TECLA 		# sai do loop caso precione alguma tecla
+	bnez	$t1, SOLTA_TECLA 		# sai do loop caso precione alguma tecla
 	add	$t0, $t0, $t0			# 1, 2, 4, 8
 	beq 	$t0, 16, CAPTURA_TECLA		# reseta o indicador de linha (t0 = 1)
-	j	LOOP_LER_TECLA			# se não apertar nada, continua iterando
-CLICOU_TECLA:
+	j	LER_TECLA			# se não apertar nada, continua iterando
+SOLTA_TECLA:
+	sb 	$t0, 0xffff0012			# insere o código da linha
+	lw 	$t2, 0xffff0014			# pega o valor na memória, pela tecla apertada
+	bne	$t2, 0, SOLTA_TECLA  	# sai do loop caso precione alguma tecla
+	
 	la	$t0, key		# t0 = endereço do vetor key
 	li	$t2, 0			# inicializa t3 como contador
 LOOP_QUAL_TECLA:
@@ -53,7 +57,6 @@ LOOP_CONFERE:
 	sb 	$t0, 0xffff0012			# insere o código da linha
 	lw 	$t1, 0xffff0014			# pega o valor na memória, pela tecla apertada
 	bne	$t1, 0, LOOP_CONFERE  	# sai do loop caso precione alguma tecla
-FINALIZA_LEITURA:
 
 	# restaura o contexto do main para os registradores utilizados
 	lw	$t0, 0($sp)
